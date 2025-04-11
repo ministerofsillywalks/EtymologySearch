@@ -1,0 +1,5 @@
+#! /bin/bash
+
+source "/usr/local/bin/EtymologySearch/bin/activate"
+python3 "/usr/local/bin/EtymologySearch/EtymologySearch.py" $@
+deactivate
