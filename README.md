@@ -1,6 +1,6 @@
 # EtymologySearch
 Dependencies
-`Requests`
+`requests`
 `lxml`
 `mwparserfromhell`
 `langcodes`
