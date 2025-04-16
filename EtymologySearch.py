@@ -110,7 +110,7 @@ def replace_templates(wikitext):
         return "No Content"
 
 def interface():
-    print("Hello! please input a word to search.")
+    print("Hello! Please input a word to search.")
     word = input()
     wikitext = fetch_wikitext(word)
     parsed = mwparserfromhell.parse(wikitext)
@@ -124,7 +124,7 @@ def interface():
     except:
         pass
     if len(etymologies) > 0:
-        print(f"{len(etymologies)} etymologies found, which one would you like to go to?")
+        print(f"{len(etymologies)} etymologies found, which one would you like to go to (0-indexed)?")
         n = int(input())
         return replace_templates(etymologies[n])
     else:
@@ -134,7 +134,7 @@ def interface():
 
 while True:
     print(interface())
-    print("Submit q to quit, otherwise press enter to search again")
+    print("Submit q to quit, otherwise press enter to search again.")
     if input() == 'q':
         break
     else:
