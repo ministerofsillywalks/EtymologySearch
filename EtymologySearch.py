@@ -54,7 +54,7 @@ def replace_templates(wikitext):
                 for param in tpl.params:
                     if not str(param.name) == '1':
                         replace_buffer += str(param.value) + ", "
-            
+            #etymon my beloathed 
             elif str(tpl.name) == 'etymon':
                 replace_buffer += "From "
                 for param in tpl.params:
@@ -63,7 +63,7 @@ def replace_templates(wikitext):
                         replace_buffer += str(param.value) + ", "
                         if str(param.name) == 'tree':
                             break
-            
+            #cognate
             elif 'cog' in name:
                 langcode = str(tpl.get('1').value) #langcode for the ancestor language
                 d_name = Language.get(langcode).display_name()
@@ -72,24 +72,28 @@ def replace_templates(wikitext):
                 else:
                     old_word = ""
                 replace_buffer = d_name + old_word
-
+            #compound, affix, and suffix
             elif name == 'compound' or 'af' in name or 'suf' in name:
                 for param in tpl.params:
                     if not str(param.name) == '1':
                         replace_buffer += str(param.value)
                         if not param == tpl.params[-1]:
                             replace_buffer += ' + '
+            #skip images
             elif name == "multiple images":
                 continue
+            #replace links with their text
             elif name == "glossary" or name == 'w':
                 replace_buffer = str(tpl.get('1'))
+            #initialism
             elif 'init' in name:
                 replace_buffer = f"initialism of {str(tpl.get('2'))}"
             elif 'R:' in name:
                 replace_buffer = ""
+            #prints "TEMPLATE ERROR" if it's a template that I haven't implemented yet
             else:
                 replace_buffer = "TEMPLATE ERROR"
-
+            #adds the translation of a word
             if tpl.has('t'):
                 gloss = ", "+ str(tpl.get('t').value)
             else:
